@@ -4,7 +4,7 @@ digraph TestingBasics {
   # make graph compound because we want to link to clusters
   graph [compound=true];
 
-  # label text alignment: use \l to have left aligned new lines and \n for centered new lines
+  # label text alignment: use backslash l to have left aligned new lines and n for centered new lines
 
   rankdir=TB;
   newrank="true";
@@ -23,6 +23,7 @@ e.g. requirements, user stories, scenarios, etc.
   
   model;
   
+  # STEP
   /*
   
 We have the 'thing we are comparing with'. Usually a System Under Test.
@@ -31,7 +32,7 @@ We have the 'thing we are comparing with'. Usually a System Under Test.
 
   comparison_thing [label="System\n Under\n Test"];
 
-
+  # STEP
   /*
 
 The model and the SUT are inputs to our testing process.
@@ -44,6 +45,7 @@ The model and the SUT are inputs to our testing process.
     comparison_thing;
   }
 
+  # STEP
   /*
 
 The simplest way to use a model for testing is to compare
@@ -56,10 +58,14 @@ the model with the System Under Test.
       compare;
   }
 
+  # STEP basic compare inputs
+  # UNCOMMENT_//
   # NOTE: this line only used in early versions of the diagram
   # later we link to the cluster, not the node 
 // {model comparison_thing} -> compare;
 
+
+  # STEP
 
   /*
 This generates output results from the comparison.
@@ -76,6 +82,7 @@ This generates output results from the comparison.
   compare [shape=square, label="Comparison"];
   compare -> output [label="Comparisons" lhead=cluster_comparison_outputs];
 
+  # STEP
   /*
 Evidential Observation Output can be used for
 negative or positive confirmation.
@@ -101,12 +108,14 @@ we observed that the system behaaved as we expected.
     positive_confirmation;
   }
 
+  # STEP
   positive_confirmation [
     label="Positive\n Confirmation",
     fillcolor=green,
     style=filled
     ];
 
+  # STEP
   /*
 Negative Confirmation is often called a 'Test Fail'.
 
@@ -123,12 +132,14 @@ This means we observed something we did not expect.
     negative_confirmation;
   }
 
+  # STEP
   negative_confirmation [
     label ="Negative\n Confirmation",
     fillcolor=red,
     style=filled
   ]
 
+  # STEP
 
   /*
 These positive and negative reports are a visible output
@@ -156,19 +167,25 @@ This might mean:
 Either way it is something we have to investigate.
   */
 
+  # STEP
   investigation -> model [
     label="- Model does not \l  match reality \l- Change the model.\l"
   ];
 
+  # STEP
   investigation -> compare [
     label="- Process Issue.\l- We did not use\l  the system properly.\l- Re-evaluate.\l"
     lhead=cluster_evaluation
   ];
 
+  # STEP immediate bug fix
+  # UNCOMMENT_//
   // investigation -> comparison_thing [
   //   label="System does not match\n what we require.\n Found a Bug.\n Fix the System."
   // ];
 
+  # DIRECTIVE
+  # DISABLE_STEP immediate bug fix
   /*
     System Under Test changes might require a defect process.
     Rather than a direct system fix.
@@ -176,6 +193,7 @@ Either way it is something we have to investigate.
 
 # NOTE: remove earlier investigation -> comparison_thing approx line 164-166
 
+  # STEP
   investigation -> raise_bug [
     label="- System does not match\n what we require."
   ];
@@ -196,7 +214,7 @@ Either way it is something we have to investigate.
         }
   }
 
-
+  # STEP
   /*
 A comparison process from model to 'thing' isn't the only process that
 Software Testing involves, it's just one of the most obvious ways we have
@@ -211,6 +229,7 @@ And Software Testing is a process of evaluating the software.
       compare;
   }
 
+  # STEP
   /*
 
 We can directly compare Requirements with the Software for high level surface
@@ -238,6 +257,7 @@ our model and as a consequence, the system itself.
       exploration;
   }
 
+  # STEP
   /*
 
 Software Testing has to explore our model to identify:
@@ -261,6 +281,7 @@ for testing and how we find new ways to explore the software.
     ltail=cluster_evaluation;
   ];
 
+  # STEP
   /*
 The model is both an input to testing, and an output from Testing.
 
@@ -271,6 +292,7 @@ lists of test ideas, etc.
   */
   model [label="Model" style=filled fillcolor=yellow];
 
+  # STEP
   /*
 
 Software Testing then has to explore the model in conjunction
@@ -282,7 +304,11 @@ or potentially require reworking the implementation.
   modelling [label="Modeling", shape=square, style=filled, fillcolor=white];
   exploration [label="Exploring", shape=square, style=filled, fillcolor=yellow];
 
+  # DIRECTIVE
+  #   DISABLE_STEP basic compare inputs
   // NOTE: remove line ~= 57 i.e. {model comparison_thing} -> compare;
+
+  # STEP
   {model comparison_thing} -> compare [lhead=cluster_evaluation];
 
 
@@ -323,6 +349,7 @@ key skills of a Tester is knowing when 'enough is enough' and stopping the
 identification and exploration of possibilities.
   */
   
+  # STEP
   /*
 ## Exploring
 
@@ -361,8 +388,10 @@ Other outputs vary depending on the process used but include artifacts like:
       ];
     }
 
+  # STEP
   exploration -> exploration_artifacts [label="Exploration" lhead=cluster_exploration_outputs];
 
+  # STEP
   /*
 Exploration is usually pursued in small chunks of time to make it easier to document
 and respond to the information gained during the exploration to make decisions
@@ -370,10 +399,12 @@ about what to test or investigate next.
   */
   exploration -> investigation [label="Investigate\n Findings"];
 
+  # STEP
 //   # Fin - reset any temporary highlights
   exploration [label="Exploring", shape=square, style=filled, fillcolor=white];
   
-
+  # END
 }
+
 
 
