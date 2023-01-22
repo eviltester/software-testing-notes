@@ -282,7 +282,7 @@ or potentially require reworking the implementation.
   modelling [label="Modeling", shape=square, style=filled, fillcolor=white];
   exploration [label="Exploring", shape=square, style=filled, fillcolor=yellow];
 
-  // NOTE: remove line ~= 57 i.e. `{model comparison_thing} -> compare;`
+  // NOTE: remove line ~= 57 i.e. {model comparison_thing} -> compare;
   {model comparison_thing} -> compare [lhead=cluster_evaluation];
 
 
